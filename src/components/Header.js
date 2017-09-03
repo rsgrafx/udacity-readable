@@ -15,7 +15,7 @@ const Header = (props) => {
           </ul>
         </div>
         <div id="sort-posts" className="col-md-2">
-          <a className="btn btn-primary btn-large btn-rounded" href="post-form.html">Start Writing</a>
+          <a className="btn btn-primary btn-large btn-rounded" href="/newpost">Start Writing</a>
         </div>
       </div>
       <hr />
