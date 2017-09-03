@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="main-app" class="container">
+      <section id="main-tab-header">
+          <div class="row">
+              <h1> <a href="/">Readable</a></h1>
+          </div>
+          <div class="row">
+            <div id="sort-posts" class="col-md-10">
+              <ul>
+                <li><a id="most-popular" href="#">Most Popular</a></li>
+                <li><a id="most-recent" href="#">Most Recent</a></li>
+                <li><a id="most-comments" href="#">Most Interactions</a></li>
+              </ul>
+            </div>
+            <div id="sort-posts" class="col-md-2">
+              <a class="btn btn-primary btn-large btn-rounded" href="post-form.html">Start Writing</a>
+            </div>
+          </div>
+          <hr />
+      </section>
+      
+      <div>
+        <div id="post-listings" class="col-md-8">
+            <div id="post-item">
+                <div class="col-xs-2 col-md-1 pull-right">
+                  <span>
+                    <h4>10</h4>
+                    <button>+</button>
+                    <button>-</button>
+                  </span>
+                </div>
+              <div class="col-xs-10 col-md-11">
+                <h2>Post Title</h2>
+                <h4>Author: Mike St. James - 20 days ago</h4>
+                <p>
+                  Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+                <p>
+                    Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+              </div>
+
+              <div class="col-xs-10 col-md-11">
+                <h3>Leave Comment</h3>
+                <div class="row comment-form">
+                    <form action="">
+                      <div class="form-group">
+                        <label for="details">Share your viewpoint: </label>
+                        <textarea name="details" id="" cols="80" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="post_comment">Your Name: </label>
+                        <input type="text" name="post_comment_author" id="">
+                      </div>
+                      <input type="hidden" name="post_item" value="postID">
+                      <input type="submit" class="btn btn-success btn-large btn-rounded" value="Save" />
+                    </form>
+                  </div>
+
+                <h3>Recent Comments</h3>
+                <button>Most Recent</button>
+                <button>Top Voted</button>
+                <hr />
+                <!-- Comment Item -->
+                <div class="comment-item">
+                    <div class="col-md-10 col-xs-12">
+                      <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                      <span class="text-primary">Posted: 3 Days Ago.</span><br>
+                      <span class="text-warning">by Orion</span>   
+                      <button>Edit</button>
+                      <button>Remove</button>
+                    </div>
+                    <div class="col-xs-2 col-md-1" id="comment-voter">
+                      <span>
+                        <h4>10</h4>
+                        <button>+</button>
+                        <button>-</button>
+                      </span>
+                    </div>
+                </div>
+                <!-- Comment Item -->
+                <div class="comment-item">
+                  <div class="col-md-10 col-xs-12">
+                    <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                    <span class="text-primary">Posted: 3 Days Ago.</span><br>
+                    <span class="text-warning">by Orion</span>
+                    <button>Edit</button>
+                    <button>Remove</button>
+                  </div>
+                  <div class="col-xs-2 col-md-1" id="comment-voter">
+                    <span>
+                      <h4>8</h4>
+                      <button>+</button>
+                      <button>-</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+           </div>
+        </div>
+        <div id="post-categories" class="col-md-4">
+            <h3>Post Categories</h3>
+            <ul>
+              <li> <a href="#react">React</a></li>
+              <li><a href="#udacity">Udacity</a></li>
+              <li><a href="#redux">Redux</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="container">
+        <hr>
+      <small>Created by Orion Engleton - Udacity React JS Class November 2017</small>
+    </footer>
+  </body>
+</html>
