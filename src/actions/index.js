@@ -3,11 +3,19 @@ import Do from './constants'
   createNewPost({})
   returns action
 */
-export function createNewPost({title, author, body, category}) {
+export function updateFromApi(post) {
+  return {...post, type: Do.UPDATE_POST_FROM_API }
+}
+
+export function loadCategoryFromApi(category) {
+  return {...category, type: Do.CATEGORY}
+}
+
+export function createNewPost({id, timestamp, title, author, body, category}) {
   return {
     type: Do.CREATE_POST,
-    id: Math.random().toString(36).substr(-10),
-    timestamp: Date.now(),
+    id,
+    timestamp,
     title,
     author,
     body,
