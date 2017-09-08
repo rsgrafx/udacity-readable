@@ -31,19 +31,21 @@ export function newComment({id, timestamp, body, parentId, author}) {
 }
 
 export function vote(payload) {
-
+  console.log(payload)
   switch (payload.type) {
     case Do.POST_VOTE:
-      let {option, postId} = payload
-      voteOnPost(option, postId)
-      return payload
-
+      voteOnPost(payload)
+      .then((resp) => {
+        return payload
+      })
+      return {type: "FAILED_VOTE"}
     case Do.COMMENT_VOTE:
-      let {option, commentId} = payload
-      voteOnComment(option, commentId)
-      return payload
-
+      voteOnComment(payload)
+      .then((resp) => {
+        return payload
+      })
+      return {type: "FAILED_VOTE"}
     default:
-      return payload
+      return {type: "FAILED_VOTE"}
   }
 }
