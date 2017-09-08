@@ -1,31 +1,49 @@
 import Do from './constants'
+import {fetchCategories} from '../utils/api'
+import {voteOnComment, voteOnPost} from '../utils/api'
 /*
   createNewPost({})
   returns action
 */
-export function updateFromApi(post) {
-  return {...post, type: Do.UPDATE_POST_FROM_API }
-}
-
-export function loadCategoryFromApi(category) {
-  return {...category, type: Do.CATEGORY}
-}
-
-export function createNewPost({id, timestamp, title, author, body, category}) {
+export const categories = (categories) => {
   return {
-    type: Do.CREATE_POST,
-    id,
-    timestamp,
-    title,
-    author,
-    body,
-    category
+    categories,
+    type: Do.CATEGORIES
   }
 }
 
-export function removePost(postId) {
+export const getCategories = () => (dispatch) => {
+  fetchCategories()
+    .then((resp) => {
+      dispatch(categories(resp.categories))
+  })
+}
+
+export function newComment({id, timestamp, body, parentId, author}) {
   return {
-    type: Do.REMOVE_POST,
-    postId: postId
+    type: Do.CREATE_COMMENT,
+    id,
+    timestamp,
+    author,
+    body,
+    parentId
+  }
+}
+
+export function vote(payload) {
+
+  switch (payload.type) {
+    case Do.POST_VOTE:
+      let {option, postId} = payload
+      voteOnPost(option, postId)
+      return payload
+
+    case Do.COMMENT_VOTE:
+      let {option, commentId} = payload
+      voteOnComment(option, commentId)
+      return payload
+
+    default:
+      return payload
   }
 }

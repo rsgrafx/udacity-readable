@@ -9,21 +9,65 @@ const headers = {
   'Accept': 'application/json',
   'Authorization': token
 }
+/*
+ * Categories
+*/
 
-export const createPostApi = (post) => {
-  let post_data = JSON.stringify(post)
+ export const fetchCategories = () => {
+  return fetch(`${API_ENDPOINT}/categories`, {headers})
+    .then((res) => res.json())
+}
+
+/*
+ * Posts
+*/
+
+ export const createPostApi = (post) => {
+
   return fetch(`${API_ENDPOINT}/posts`, {
     method: 'POST',
     headers: headers,
-    body: post_data
+    body: JSON.stringify(post)
   }).then((resp) => resp.json())
 }
+
+export const removePostApi = (postId) => {
+  return fetch(`${API_ENDPOINT}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: headers,
+    deleted: true
+  }).then((resp) => resp.json())
+}
+
 export const fetchPosts = () => {
   return fetch(`${API_ENDPOINT}/posts`, {headers})
     .then((res) => res.json())
 }
 
-export const fetchCategories = () => {
-  return fetch(`${API_ENDPOINT}/categories`, {headers})
+export const fetchPostsByCategory = (category) => {
+  console.log("Category", category)
+  return fetch(`${API_ENDPOINT}/${category}/posts`, {headers})
     .then((res) => res.json())
+}
+
+export const fetchPost = (postID) => {
+  return fetch(`${API_ENDPOINT}/posts/${postID}`, {headers})
+    .then((res) => res.json())
+}
+
+/*
+ * Comments
+*/
+
+export const fetchComments = (postID) => {
+  return fetch(`${API_ENDPOINT}/posts/${postID}/comments`, {headers})
+    .then((res) => res.json())
+}
+
+export const createCommentApi = (comment) => {
+  return fetch(`${API_ENDPOINT}/comments`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(comment)
+  }).then((resp) => resp.json())
 }

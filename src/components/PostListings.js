@@ -1,25 +1,29 @@
 import React, {Component} from 'react'
-import {fetchPosts} from '../utils/api'
-import {updateFromApi} from '../actions'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+
+import {getPosts, getPostsByCategory} from '../actions/posts'
+
 import store from  '../store'
 
 const PostShortItem = ({post}) => {
   return(
     <div id="post-item">
       <div className="col-xs-10 col-md-11">
-        <a href="post-view.html"><h2>{post.title}</h2></a>
+        <Link to={`/post/${post.id}`}><h2>{post.title}</h2></Link>
       <p>
         {post.body}
       </p>
-      <span><a href="post-view.html" className="pull-right">Read Full Post</a></span>
+      <span>
+        <Link to={`/post/${post.id}`}>Read Full Post</Link>
+        </span>
       <div id="post-meta-data">
           <span className="row">
             <span className="text-primary">{post.timestamp}</span><br />
-            <span className="text-warning">3 Comments</span>  
+            <span className="text-warning">3 Comments</span>
           </span>
       </div>
-      
+
     </div>
     <div className="col-xs-2 col-md-1">
       <span>
@@ -32,26 +36,25 @@ const PostShortItem = ({post}) => {
 }
 
 class PostListings extends Component {
-  state = {
-    posts: []
-  }
-  
+
+  loadCategoryPosts = (category) => store.dispatch(getPostsByCategory(category))
+
   componentWillMount() {
-    fetchPosts()
-    .then( (responseData) => {
-      responseData.map((post) => {
-        this.props.updatePostStore(post)
-      })
-      const {posts} = store.getState()
-      this.setState({...this.state, posts})
-    })
+    // const boundAddTodo = text => dispatch(addTodo(text))
+    let {router, loadPosts, loadCategoryPosts} = this.props
+
+    if (router === false) {
+      loadPosts()
+    } else {
+      this.loadCategoryPosts(router.match.params.category)
+    }
   }
 
   render() {
       return(
       <div id="post-listings" className="col-md-8">
           <h3>What's Happening Today</h3>
-          {this.state.posts.map((post) => <PostShortItem key={post.id} post={post} />)}
+          {this.props.posts.map((post) => <PostShortItem key={post.id} post={post} />)}
       </div>)
     }
 }
@@ -60,7 +63,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    updatePostStore: (data) => dispatch(updateFromApi(data))
+    loadPosts: () => dispatch(getPosts())
   }
 }
 
