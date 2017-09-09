@@ -13,6 +13,11 @@ export const posts = (posts) => ({
   posts
 })
 
+export const filterPosts = (category) => ({
+  type: Do.FILTER_POSTS,
+  category: category
+})
+
 export const addPost = (post) => {
   return {
     type: Do.ADD_POST,
@@ -67,10 +72,5 @@ export const getPost = (postId) => (dispatch) => {
 }
 
 export const getPostsByCategory = (category) => (dispatch) => {
-  fetchPostsByCategory(category)
-    .then((data) => {
-      console.log(data)
-      dispatch(posts(data))
-    })
-  .catch(err => console.error(err))
+  dispatch(filterPosts(category))
 }

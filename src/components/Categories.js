@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import store from '../store'
 import { getCategories } from  '../actions'
+import { getPostsByCategory } from '../actions/posts'
 
 class Categories extends Component {
   state = {
@@ -17,7 +18,9 @@ class Categories extends Component {
     <div id="post-categories" className="col-md-4">
       <h3>Post Categories</h3>
       <ul>
-        {this.props.categories.map((cat) => (<li key={cat.name} > <a href={cat.path}>{cat.name}</a></li>))}
+        {this.props.categories.map((cat) => (<li key={cat.name} >
+          <a onClick={() => {this.props.filterByCategory(cat.name)}}>{cat.name}</a></li>))
+        }
       </ul>
     </div>)
   }
@@ -28,6 +31,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    filterByCategory: (data) => dispatch(getPostsByCategory(data)),
     loadCategories: (data) => dispatch(getCategories(data))
   }
 }

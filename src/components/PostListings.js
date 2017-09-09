@@ -38,24 +38,26 @@ const PostShortItem = ({post}) => {
 
 class PostListings extends Component {
 
+  state = {
+    posts: []
+  }
+
   loadCategoryPosts = (category) => store.dispatch(getPostsByCategory(category))
 
   componentWillMount() {
     // const boundAddTodo = text => dispatch(addTodo(text))
     let {router, loadPosts, loadCategoryPosts} = this.props
-
-    if (router === false) {
-      loadPosts()
-    } else {
-      this.loadCategoryPosts(router.match.params.category)
-    }
+    loadPosts()
+    store.subscribe(() => {
+      this.setState({posts: store.getState().posts})
+    })
   }
 
   render() {
       return(
       <div id="post-listings" className="col-md-8">
           <h3>What's Happening Today</h3>
-          {this.props.posts.map((post) => <PostShortItem key={post.id} post={post} />)}
+          {this.state.posts.map((post) => <PostShortItem key={post.id} post={post} />)}
       </div>)
     }
 }

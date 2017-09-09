@@ -15,6 +15,7 @@ const actions = {
     EDIT_POST: "EDIT_POST",
     REMOVE_POST: "REMOVE_POST",
     POST_VOTE: "POST_VOTE",
+    FILTER_POSTS: "FILTER_POSTS",
 
     // Sorting
     MOST_RECENT_POSTS: "MOST_RECENT_POSTS",

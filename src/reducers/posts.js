@@ -18,6 +18,9 @@ export const posts = (state = [], action) => {
       // remove Add Id to deleted_posts list.
       return state.filter(post => (post.id !== action.postId))
 
+    case Do.FILTER_POSTS:
+    // remove Add Id to deleted_posts list.
+      return state.filter(post => (post.category === action.category))
     default:
       return state;
   }
