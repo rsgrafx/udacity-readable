@@ -1,12 +1,19 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import VoteControl from './votes/VoteControl'
+import Do from '../actions/constants'
 
 import {getPosts, getPostsByCategory} from '../actions/posts'
 
 import store from  '../store'
 
 const PostShortItem = ({post}) => {
+  const payload = {
+    type: Do.POST_VOTE,
+    postId: post.id
+  }
+
   return(
     <div id="post-item">
       <div className="col-xs-10 col-md-11">
@@ -25,13 +32,7 @@ const PostShortItem = ({post}) => {
       </div>
 
     </div>
-    <div className="col-xs-2 col-md-1">
-      <span>
-        <h4>10</h4>
-        <button>+</button>
-        <button>-</button>
-      </span>
-    </div>
+    <VoteControl payload={payload} />
   </div>)
 }
 
