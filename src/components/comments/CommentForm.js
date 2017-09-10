@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {createComment} from '../../actions/comments'
 
 const CommentForm = (props) => {
-  let body, author, postID
+  let body, author
 
   const submitComment = (event) => {
     let comment = {

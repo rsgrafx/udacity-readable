@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {sort} from '../actions/sorter'
 import {connect} from 'react-redux'
 

@@ -1,4 +1,3 @@
-import Do from './constants'
 import store from '../store'
 
 export const mostRecent = (first, second) => {

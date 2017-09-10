@@ -18,6 +18,7 @@ const Comment = ({comment}) => {
           <button>Edit</button>
           <button>Remove</button>
         </div>
+        <span> Current Vote Score: { comment.voteScore}</span>
       </div>
       <VoteControl payload={payload}/>
     </div>

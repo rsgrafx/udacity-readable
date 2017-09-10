@@ -3,7 +3,6 @@ import store from '../store'
 
 import {
   fetchPosts,
-  fetchPostsByCategory,
   fetchPost,
   createPostApi,
   removePostApi

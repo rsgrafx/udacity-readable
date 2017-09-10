@@ -41,7 +41,7 @@ export const vote = (payload) => (dispatch) => {
     case Do.COMMENT_VOTE:
       voteOnComment(payload)
       .then((resp) => {
-        return payload
+        dispatch({type: Do.COMMENT_VOTE, payload})
       })
       return {type: "FAILED_VOTE"}
     default:

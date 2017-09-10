@@ -10,7 +10,7 @@ export const posts = (state = [], action) => {
       return state.filter((post) => (post.id === action.postID))
 
     case Do.POSTS:
-      return [...state, ...action.posts]
+      return [...state, ...action.posts].sort(mostPopular)
 
     case Do.ADD_POST:
       return [...state, post({}, {...action, type: Do.POST})]

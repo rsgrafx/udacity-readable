@@ -27,7 +27,7 @@ const PostShortItem = ({post}) => {
       <div id="post-meta-data">
           <span className="row">
             <span className="text-primary">{post.timestamp}</span><br />
-            <span className="text-warning">3 Comments</span>
+            <span className="text-warning">Current Score: {post.voteScore}</span>
           </span>
       </div>
 
@@ -45,7 +45,7 @@ class PostListings extends Component {
   loadCategoryPosts = (category) => store.dispatch(getPostsByCategory(category))
 
   componentWillMount() {
-    let {router, loadPosts, loadCategoryPosts} = this.props
+    let {loadPosts} = this.props
     loadPosts()
     store.subscribe(() => {
       this.setState({posts: store.getState().posts})

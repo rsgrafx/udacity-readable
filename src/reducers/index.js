@@ -1,7 +1,5 @@
 import {combineReducers} from 'redux'
 
-import Do from '../actions/constants'
-
 import {comments, comment} from './comments'
 import {categories, category} from './categories'
 import {allPosts, posts, post} from  './posts'

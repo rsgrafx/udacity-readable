@@ -1,10 +1,11 @@
 import Do from './constants'
 import {createCommentApi, fetchComments} from '../utils/api'
 
-export const comments = (comments) => {
+export const comments = (comments, postId) => {
   return {
     type: Do.COMMENTS,
-    comments: comments
+    comments: comments,
+    postId
   }
 }
 
@@ -18,7 +19,7 @@ export const addComment = (comment) => {
 export const getComments = (postId) => (dispatch) => {
   fetchComments(postId)
     .then((resp) => {
-      dispatch(comments(resp))
+      dispatch(comments(resp, postId))
     })
 }
 
@@ -27,4 +28,12 @@ export const createComment = (comment) => (dispatch) => {
     .then((resp) => {
       dispatch(addComment(resp))
     })
+}
+
+export const sortCommentbyVote = () => (dispatch) => {
+  dispatch({type: Do.MOST_POPULAR_COMMENTS})
+}
+
+export const sortCommentsMostRecent = () => (dispatch) => {
+  dispatch({type: Do.MOST_RECENT_COMMENTS})
 }
