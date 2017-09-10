@@ -45,7 +45,6 @@ class PostListings extends Component {
   loadCategoryPosts = (category) => store.dispatch(getPostsByCategory(category))
 
   componentWillMount() {
-    // const boundAddTodo = text => dispatch(addTodo(text))
     let {router, loadPosts, loadCategoryPosts} = this.props
     loadPosts()
     store.subscribe(() => {
@@ -61,6 +60,7 @@ class PostListings extends Component {
       </div>)
     }
 }
+
 const mapStateToProps = (state) => {
   return state
 }

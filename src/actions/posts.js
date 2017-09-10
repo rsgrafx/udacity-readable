@@ -1,4 +1,5 @@
 import Do from './constants'
+import store from '../store'
 
 import {
   fetchPosts,
@@ -13,9 +14,15 @@ export const posts = (posts) => ({
   posts
 })
 
-export const filterPosts = (category) => ({
+export const filterPosts = (category, posts) => ({
   type: Do.FILTER_POSTS,
-  category: category
+  category: category,
+  posts: posts
+})
+
+export const postsVoteDesc = (posts) => ({
+  type: Do.MOST_RECENT_POSTS,
+  posts: posts
 })
 
 export const addPost = (post) => {
@@ -72,5 +79,9 @@ export const getPost = (postId) => (dispatch) => {
 }
 
 export const getPostsByCategory = (category) => (dispatch) => {
-  dispatch(filterPosts(category))
+  dispatch(filterPosts(category, store.getState().allPosts))
+}
+
+export const filterByVoteDesc = () => (dispatch) => {
+  dispatch(postsVoteDesc(store.getState().allPosts))
 }

@@ -21,7 +21,6 @@ const Home = ({router, store}) => {
      <div>
       <Header />
       <PostForm />
-      <Categories />
      </div>
    )
  }
@@ -39,9 +38,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Route exact path="/newpost" render={(router) => <Post router={router} /> } />
         <Route exact path="/post/:id" render={(router) => <ViewPost router={router} /> } />
-        <Route exact path="/newpost" render={() => <Post /> } />
-        <Route exact path="/:category" render={(router) => <Home router={router}/> } />
         <Route exact path="/" render={() => <Home router={false}/> } />
       </div>
     );

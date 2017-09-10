@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {sort} from '../actions/sorter'
+import {connect} from 'react-redux'
 
 const Header = (props) => {
   return(
@@ -9,9 +11,12 @@ const Header = (props) => {
       <div className="row">
         <div id="sort-posts" className="col-md-10">
           <ul>
-            <li><a id="most-popular" href="#">Most Popular</a></li>
-            <li><a id="most-recent" href="#">Most Recent</a></li>
-            <li><a id="most-comments" href="#">Most Interactions</a></li>
+            <li><a id="most-popular" onClick={() => {
+              props.sortPosts("MOST_POPULAR_POSTS")}}>Most Popular</a>
+            </li>
+            <li><a id="most-popular" onClick={() => {
+              props.sortPosts("MOST_RECENT_POSTS")}}>Most Recent</a>
+            </li>
           </ul>
         </div>
         <div id="sort-posts" className="col-md-2">
@@ -22,4 +27,11 @@ const Header = (props) => {
     </section>
   )
 }
-export default Header;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sortPosts: (data) => dispatch(sort(data)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Header);

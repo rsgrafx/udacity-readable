@@ -30,13 +30,12 @@ export function newComment({id, timestamp, body, parentId, author}) {
   }
 }
 
-export function vote(payload) {
-  console.log(payload)
+export const vote = (payload) => (dispatch) => {
   switch (payload.type) {
     case Do.POST_VOTE:
       voteOnPost(payload)
       .then((resp) => {
-        return payload
+        dispatch({type: Do.POST_VOTE, payload})
       })
       return {type: "FAILED_VOTE"}
     case Do.COMMENT_VOTE:

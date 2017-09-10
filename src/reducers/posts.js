@@ -1,4 +1,5 @@
 import Do from '../actions/constants'
+import {mostRecent, mostPopular}  from  '../actions/sorter'
 /*
   * When you create a post What are some of the things that need to happen.
 */
@@ -19,10 +20,43 @@ export const posts = (state = [], action) => {
       return state.filter(post => (post.id !== action.postId))
 
     case Do.FILTER_POSTS:
-    // remove Add Id to deleted_posts list.
-      return state.filter(post => (post.category === action.category))
+      return action.posts.filter(post => (post.category === action.category))
+
+    case Do.MOST_RECENT_POSTS:
+      return action.posts.sort(mostRecent)
+
+    case Do.MOST_POPULAR_POSTS:
+      return action.posts.sort(mostPopular)
+
+    case Do.POST_VOTE:
+      return state.map((post) => {
+        if (action.payload.postId === post.id) {
+          return postVote(post, action.payload.option)
+        } else {
+          return post
+        }
+      })
     default:
       return state;
+  }
+}
+
+const postVote = (post, option) => {
+  if (option === "upVote") {
+    return Object.assign(post,
+    {voteScore: post.voteScore + 1 })
+  } else if (option === "downVote") {
+    return Object.assign(post,
+      {voteScore: post.voteScore - 1 })
+  }
+}
+
+export const allPosts = (state = [], action) => {
+  switch (action.type) {
+    case Do.POSTS:
+      return [...state, ...action.posts]
+    default:
+      return state
   }
 }
 
