@@ -1,10 +1,7 @@
 import Do from './constants'
 import {fetchCategories} from '../utils/api'
 import {voteOnComment, voteOnPost} from '../utils/api'
-/*
-  createNewPost({})
-  returns action
-*/
+
 export const categories = (categories) => {
   return {
     categories,

@@ -22,7 +22,6 @@ const headers = {
  * Posts
 */
  export const createPostApi = (post) => {
-
   return fetch(`${API_ENDPOINT}/posts`, {
     method: 'POST',
     headers: headers,
@@ -89,9 +88,9 @@ export const voteOnPost = ({option, postId}) => {
 
 export const voteOnComment = ({option, commentId}) => {
   return fetch(`${API_ENDPOINT}/comments/${commentId}`, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({option: option})
-    })
-    .then((res) => res.json())
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({option: option})
+  })
+  .then((res) => res.json())
 }

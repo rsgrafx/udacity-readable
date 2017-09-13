@@ -10,23 +10,27 @@ export const posts = (state = [], action) => {
       return state.filter((post) => (post.id === action.postID))
 
     case Do.POSTS:
-      return [...state, ...action.posts].sort(mostPopular)
+      return [...state, ...action.posts]
+        .sort(mostPopular)
+        .filter((post) => !(post.deleted))
 
     case Do.ADD_POST:
       return [...state, post({}, {...action, type: Do.POST})]
 
     case Do.REMOVE_POST:
-      // remove Add Id to deleted_posts list.
       return state.filter(post => (post.id !== action.postId))
 
     case Do.FILTER_POSTS:
       return action.posts.filter(post => (post.category === action.category))
+        .filter((post) => !(post.deleted))
 
     case Do.MOST_RECENT_POSTS:
       return action.posts.sort(mostRecent)
+          .filter((post) => !(post.deleted))
 
     case Do.MOST_POPULAR_POSTS:
       return action.posts.sort(mostPopular)
+        .filter((post) => !(post.deleted))
 
     case Do.POST_VOTE:
       return state.map((post) => {

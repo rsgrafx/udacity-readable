@@ -16,6 +16,13 @@ export const comments = (state = [], action) => {
     case Do.MOST_RECENT_COMMENTS:
       return state.sort(mostRecent)
 
+    case Do.REMOVE_POST:
+      return state.map((comment) => {
+        if (comment.parentId === action.postId) {
+          Object.assign(comment, {parentId: null})
+        }
+      })
+
     case Do.COMMENT_VOTE:
       return state.map((comment) => {
         if (action.payload.commentId === comment.id) {

@@ -39,7 +39,7 @@ export const post = (post) => {
   }
 }
 
-export const remove_post = (postId) => {
+export const delete_post = (postId) => {
   return {
     type: Do.REMOVE_POST,
     postId: postId
@@ -69,10 +69,10 @@ export const updatePost = (post) => dispatch => {
   .catch(err => console.error(err))
 }
 
-export const removePost = (postId) => dispatch => {
+export const deletePost = (postId) => dispatch => {
   removePostApi(postId)
   .then((resp) => {
-    dispatch(remove_post(resp))
+    dispatch(delete_post(resp))
   })
   .catch(err => console.error(err))
 }
