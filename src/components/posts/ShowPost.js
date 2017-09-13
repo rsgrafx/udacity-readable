@@ -13,55 +13,43 @@ import VoteControl from '../votes/VoteControl'
 
 class ShowPost extends Component {
 
-  state = {
-    post: {},
-    comments: []
-  }
-
   componentWillMount() {
     const {router} = this.props
-
     this.props.loadPost(router.match.params.id)
     this.props.loadComments(router.match.params.id)
-
-    store.subscribe(() => {
-      this.setState({
-        post: store.getState().post,
-        comments: store.getState().comments
-      })
-    })
   }
 
   render() {
-
+    const comments = store.getState().comments
+    const post = store.getState().post
     const payload = {
       type: Do.POST_VOTE,
-      postId: this.state.post.id
+      postId: post.id
     }
 
     return(
       <div id="post-item">
         <div className="col-xs-10 col-md-11">
           <VoteControl payload={payload}/>
-          <Link to={`/post/${this.state.post.id}/edit`}
+          <Link to={`/post/${post.id}/edit`}
             className="btn btn-small btn-warning">Edit Post
           </Link>
-          <h2>{this.state.post.title}</h2>
-          <h4>Author: {this.state.post.author} - {this.state.post.timestamp} </h4>
+          <h2>{post.title}</h2>
+          <h4>Author: {post.author} - {post.timestamp} </h4>
           <p>
-            {this.state.post.body}
+            {post.body}
           </p>
         </div>
 
         <div className="col-xs-10 col-md-11">
           <h3>Leave Comment</h3>
-          <CommentForm postID={this.state.post.id}/>
+          <CommentForm postID={post.id}/>
 
         <h3>Recent Comments</h3>
           <button onClick={() => {this.props.commentsMostRecent()}}>Most Recent</button>
           <button onClick={() => {this.props.commentsByMostVotes()}}>Top Voted</button>
         <hr />
-        { this.state.comments.map( (comment) => <Comment key={comment.id} comment={comment}/> )}
+        { comments.map( (comment) => <Comment key={comment.id} comment={comment}/> )}
       </div>
     </div>)
   }
