@@ -39,10 +39,11 @@ class Form extends Component {
   onSubmitForm(event) {
     const {_title, _body, _author} = this.refs
     event.preventDefault()
-
+    const category = store.getState().post.category
     store.dispatch({
       type: Do.PREPARE_POST,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      category: ( category === undefined) ? 'react' : category
     })
 
     this.props.formFunc(store.getState().post)

@@ -17,7 +17,6 @@ const headers = {
   return fetch(`${API_ENDPOINT}/categories`, {headers})
     .then((res) => res.json())
 }
-
 /*
  * Posts
 */

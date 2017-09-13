@@ -17,9 +17,11 @@ class Categories extends Component {
     <div id="post-categories" className="col-md-4">
       <h3>Post Categories</h3>
       <ul>
-        {categories.map((cat) => (<li key={cat.name} >
-          <a onClick={() => {this.props.filterByCategory(cat.name)}}>{cat.name}</a></li>))
-        }
+        {categories.map((cat) => (
+          <li key={cat.name}>
+            <a onClick={() => {this.props.filterByCategory(cat.name)}}>{cat.name}</a>
+          </li>)
+        )}
       </ul>
     </div>)
   }
