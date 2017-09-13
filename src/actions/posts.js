@@ -5,6 +5,7 @@ import {
   fetchPosts,
   fetchPost,
   createPostApi,
+  updatePostApi,
   removePostApi
 } from '../utils/api'
 
@@ -47,6 +48,14 @@ export const remove_post = (postId) => {
 
 export const createPost = (post) => dispatch => {
   createPostApi(post)
+  .then((resp) => {
+    dispatch(addPost(resp))
+  })
+  .catch(err => console.error(err))
+}
+
+export const updatePost = (post) => dispatch => {
+  updatePostApi(post)
   .then((resp) => {
     dispatch(addPost(resp))
   })

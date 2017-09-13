@@ -30,6 +30,14 @@ const headers = {
   }).then((resp) => resp.json())
 }
 
+export const updatePostApi = (post) => {
+    return fetch(`${API_ENDPOINT}/posts/${post.id}`, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify(post)
+    }).then((resp) => resp.json())
+  }
+
 export const removePostApi = (postId) => {
   return fetch(`${API_ENDPOINT}/posts/${postId}`, {
     method: 'DELETE',

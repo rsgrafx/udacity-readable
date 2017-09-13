@@ -6,6 +6,7 @@ import PostListings from "./components/PostListings"
 import Categories from "./components/Categories"
 import PostForm from "./components/posts/PostForm"
 import ShowPost from "./components/posts/ShowPost"
+import EditPostForm from "./components/posts/EditPost"
 
 const Home = ({router, store}) => {
   return(<div>
@@ -33,12 +34,22 @@ const Home = ({router, store}) => {
   )
  }
 
+ const EditPost = ({router, store}) => {
+  return(
+    <div>
+     <Header />
+     <EditPostForm router={router} />
+    </div>
+  )
+ }
+
 export default class App extends Component {
   render() {
     return (
       <div>
         <Route exact path="/newpost" render={(router) => <Post router={router} /> } />
         <Route exact path="/post/:id" render={(router) => <ViewPost router={router} /> } />
+        <Route exact path="/post/:id/edit" render={(router) => <EditPost router={router} /> } />
         <Route exact path="/" render={() => <Home router={false}/> } />
       </div>
     );

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import store from '../../store'
@@ -40,9 +41,11 @@ class ShowPost extends Component {
 
     return(
       <div id="post-item">
-        <VoteControl payload={payload}/>
-
         <div className="col-xs-10 col-md-11">
+          <VoteControl payload={payload}/>
+          <Link to={`/post/${this.state.post.id}/edit`}
+            className="btn btn-small btn-warning">Edit Post
+          </Link>
           <h2>{this.state.post.title}</h2>
           <h4>Author: {this.state.post.author} - {this.state.post.timestamp} </h4>
           <p>
