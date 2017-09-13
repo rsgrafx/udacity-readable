@@ -46,6 +46,13 @@ export const remove_post = (postId) => {
   }
 }
 
+export const newPost = () => {
+  return {
+    type: Do.NEW_POST,
+    postId: Math.random().toString(36).substr(-10)
+  }
+}
+
 export const createPost = (post) => dispatch => {
   createPostApi(post)
   .then((resp) => {

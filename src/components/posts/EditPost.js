@@ -16,7 +16,6 @@ class EditPostForm extends Component {
     render() {
       return(<Form
           categories={store.getState().categories}
-          postObj={ store.getState().post }
           formFunc={this.props.editPost}
           />)
     }

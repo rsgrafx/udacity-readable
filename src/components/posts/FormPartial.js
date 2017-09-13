@@ -1,70 +1,71 @@
 import React, {Component} from 'react'
+import Do from '../../actions/constants'
+import store from '../../store'
+import {newPost} from '../../actions/posts'
 
 class Form extends Component {
-  // const  title, author, body, category
-  state = {
-    id: '',
-    timestamp: Date.now(),
-    title: '',
-    author: '',
-    body: '',
-    category: ''
-  }
 
   handleTitleChange(event) {
-    this.setState({...this.state,
-      title: event.target.value,
+    store.dispatch({
+      type: Do.PREPARE_POST,
+      title: event.target.value
     })
   }
   handleAuthorChange(event) {
-    this.setState({...this.state,
+    store.dispatch({
+      type: Do.PREPARE_POST,
       author: event.target.value
     })
   }
 
   handleBodyChange(event) {
-    this.setState({...this.state,
+    store.dispatch({
+      type: Do.PREPARE_POST,
       body: event.target.value
     })
   }
 
   handleCategoryChange(event) {
-    this.setState({...this.state,
+    store.dispatch({
+      type: Do.PREPARE_POST,
       category: event.target.value
     })
   }
 
   componentWillMount() {
-    this.setState({...this.state, ...this.props.postObj})
+    const {categories} = this.props
   }
 
   onSubmitForm(event) {
+    const {_title, _body, _author} = this.refs
     event.preventDefault()
 
-    if (this.state.id === '') {
-      this.setState({...this.state, id: Math.random().toString(36).substr(-10)})
-    }
+    store.dispatch({
+      type: Do.PREPARE_POST,
+      timestamp: Date.now()
+    })
 
-    this.props.formFunc(this.state)
+    this.props.formFunc(store.getState().post)
+    store.dispatch({type: Do.NEW_POST})
 
-    this.state.title = ''
-    this.state.author = ''
-    this.state.body = ''
+    _title.value = ''
+    _body.value = ''
+    _author.value = ''
   }
 
   render() {
-    let {categories, postObj} = this.props
+
     return(
       <div id="create-post-form" className="col-md-8">
-        <h3>{
-          (this.state.title === '') ? 'New Post From React' : `Edit Post: "${this.state.title}"`}</h3>
+
         <form onSubmit={this.onSubmitForm.bind(this)}>
           <label>Title</label>
           <input
+            ref="_title"
             type="text"
             name="title"
             placeholder="Enter Title.."
-            value={this.state.title}
+            value={store.getState().post.title}
             onChange={this.handleTitleChange.bind(this)}
             className="form-control"
             />
@@ -78,18 +79,20 @@ class Form extends Component {
 
           <input
             type="text"
+            ref="_author"
             name="author"
             placeholder="Enter Authors name..."
+            value={store.getState().post.author}
             onChange={this.handleAuthorChange.bind(this)}
-            value={this.state.author}
             className="form-control" />
           <label >Post Body</label>
           <textarea
             name="body"
+            ref="_body"
             cols="30"
             rows="10"
             placeholder="details..."
-            value={this.state.body}
+            value={store.getState().post.body}
             onChange={this.handleBodyChange.bind(this)}
             className="form-control">
           </textarea>

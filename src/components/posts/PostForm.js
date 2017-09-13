@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {createPost} from '../../actions/posts'
+import {newPost, createPost} from '../../actions/posts'
 import {getCategories} from  '../../actions'
 
 import Form from './FormPartial'
@@ -8,6 +8,7 @@ import Form from './FormPartial'
 class PostForm extends Component {
 
   componentWillMount() {
+    this.props.prepareNewPost()
     this.props.loadCategories()
   }
   render() {
@@ -25,7 +26,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadCategories: (data) => dispatch(getCategories(data)),
-    newPost: (data) => dispatch(createPost(data))
+    newPost: (data) => dispatch(createPost(data)),
+    prepareNewPost: () => dispatch(newPost())
   }
 }
 
