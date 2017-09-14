@@ -24,6 +24,5 @@ export const sort = (sortType) => {
   return {
     type: sortType,
     posts: store.getState().allPosts.filter((post) => !(post.deleted))
-
   }
 }

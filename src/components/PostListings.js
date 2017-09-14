@@ -38,31 +38,25 @@ const PostShortItem = ({post}) => {
 
 class PostListings extends Component {
 
-  state = {
-    posts: []
-  }
-
   loadCategoryPosts = (category) => store.dispatch(getPostsByCategory(category))
 
   componentWillMount() {
-    let {loadPosts} = this.props
+    const {loadPosts} = this.props
     loadPosts()
-    store.subscribe(() => {
-      this.setState({posts: store.getState().posts})
-    })
   }
 
   render() {
+      const {posts} = this.props
       return(
       <div id="post-listings" className="col-md-8">
           <h3>What's Happening Today</h3>
-          {this.state.posts.map((post) => <PostShortItem key={post.id} post={post} />)}
+          {posts.map((post) => <PostShortItem key={post.id} post={post} />)}
       </div>)
     }
 }
 
 const mapStateToProps = (state) => {
-  return state
+  return {posts: state.posts}
 }
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import { Redirect } from 'react-router'
 import {connect} from 'react-redux'
 
-import store from '../../store'
 import Do from '../../actions/constants'
 
 import {
@@ -22,7 +21,7 @@ import CommentForm from '../comments/CommentForm'
 import VoteControl from '../votes/VoteControl'
 
 class ShowPost extends Component {
-  state = {comments: [], redirect: false}
+  state = {redirect: false}
 
   componentWillMount() {
     const {router} = this.props
@@ -36,12 +35,7 @@ class ShowPost extends Component {
   }
 
   render() {
-    store.subscribe(() => {
-      this.setState({comments: store.getState().comments})
-    })
-
-    const post = store.getState().post
-    const { commentsByMostVotes, commentsMostRecent } = this.props
+    const { commentsByMostVotes, commentsMostRecent, post, comments } = this.props
     const payload = {
       type: Do.POST_VOTE,
       postId: post.id
@@ -72,14 +66,17 @@ class ShowPost extends Component {
           <button onClick={() => {commentsMostRecent()}}>Most Recent</button>
           <button onClick={() => {commentsByMostVotes()}}>Top Voted</button>
           <hr />
-          {this.state.comments.map((c) => <Comment key={c.id} comm={c} />)}
+          {comments.map((c) => <Comment key={c.id} comm={c} />)}
         </div>
       </div>)
   }
 }
 
 const mapStateToProps = (state) => {
-  return state
+  return {
+    comments: state.comments,
+    post: state.post
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
