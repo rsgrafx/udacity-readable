@@ -1,11 +1,24 @@
-# Readable API Server
+# Readable Udacity App
+
+This application has two parts - `frontend` and the `backend`
 
 ## Installation
 
 Install packages: `npm install`
-Launch server: `node server`
-Unless modified in `config.js` server will use port 3001
 
+Launch server: `yarn start`
+
+Launch Node Express backend: `cd ./backend && node start`
+
+# Backend Development Server
+
+`git clone https://github.com/udacity/reactnd-project-readable-starter`
+
+run cd into folder and `npm install && yarn start`
+
+Unless modified in `config.js` server will use port `3000`
+
+Backend Server will run on port `5001`
 
 ## API
 Use an Authorization header to work with your own data:
