@@ -8,11 +8,15 @@ import {deleteComment} from '../../actions/comments'
 
 const Comment = (props) => {
 
-  const {comm, removeComment} = props
+  const {comm, removeComment, prepare} = props
 
   const payload = {
     type: Do.COMMENT_VOTE,
     commentId: comm.id
+  }
+
+  const prepareComment = (comment) => {
+    prepare(comment)
   }
 
   return(
@@ -22,8 +26,8 @@ const Comment = (props) => {
         <span className="text-primary">Posted: {comm.timestamp}.</span>
         <span className="text-warning">by {comm.author}</span>
         <div className="comment-control">
-          <button>Edit</button>
-          <button onClick={() => { removeComment(comm.id) }}>Remove</button>
+          <button onClick={() => {prepareComment(comm)} }>Edit</button>
+          <button onClick={() => {removeComment(comm.id) }}>Remove</button>
         </div>
         <span> Current Vote Score: { comm.voteScore}</span>
       </div>
@@ -38,6 +42,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    prepare: (data) => dispatch({type: "PREPARE_COMMENT", comment: data}),
     removeComment: (data) => dispatch(deleteComment(data)),
   }
 }

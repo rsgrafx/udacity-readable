@@ -1,11 +1,18 @@
 import Do from './constants'
-import {removeCommentApi, createCommentApi, fetchComments} from '../utils/api'
+import {removeCommentApi, updateCommentApi, createCommentApi, fetchComments} from '../utils/api'
 
 export const comments = (comments, postId) => {
   return {
     type: Do.COMMENTS,
     comments: comments,
     postId
+  }
+}
+
+const update_comments = (comment) => {
+  return {
+    type: Do.UPDATE_COMMENTS,
+    payload: comment
   }
 }
 
@@ -20,6 +27,12 @@ export const removeComment = (commentId) => {
   return {
     type: Do.REMOVE_COMMENT,
     commentId
+  }
+}
+
+export const clearComment = () => {
+  return {
+    type: Do.CLEAR_COMMENT
   }
 }
 
@@ -41,6 +54,12 @@ export const createComment = (comment) => (dispatch) => {
   createCommentApi(comment)
     .then((resp) => {
       dispatch(addComment(resp))
+    })
+}
+export const editComment = (comment) => (dispatch) => {
+  updateCommentApi(comment)
+    .then((resp) => {
+      dispatch(update_comments(comment))
     })
 }
 

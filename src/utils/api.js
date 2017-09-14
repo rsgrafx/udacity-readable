@@ -64,6 +64,14 @@ export const fetchPost = (postID) => {
  * Comments
 */
 
+export const updateCommentApi = (comment) => {
+  return fetch(`${API_ENDPOINT}/comments/${comment.id}`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(comment)
+  }).then((resp) => resp.json())
+}
+
 export const fetchComments = (postID) => {
   return fetch(`${API_ENDPOINT}/posts/${postID}/comments`, {headers})
     .then((res) => res.json())

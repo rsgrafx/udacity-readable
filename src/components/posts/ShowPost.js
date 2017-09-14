@@ -68,7 +68,7 @@ class ShowPost extends Component {
         {this.state.redirect && <Redirect to={'/'} />}
         <div className="col-xs-10 col-md-11">
           <h3>Leave Comment</h3>
-          <CommentForm postID={post.id}/>
+          <CommentForm postID={post.id} />
           <h3>Recent Comments</h3>
           <button onClick={() => {commentsMostRecent()}}>Most Recent</button>
           <button onClick={() => {commentsByMostVotes()}}>Top Voted</button>

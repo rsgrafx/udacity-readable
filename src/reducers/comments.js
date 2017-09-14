@@ -13,7 +13,10 @@ export const comments = (state = [], action) => {
     case Do.REMOVE_COMMENT:
       return state.filter((comment) => (comment.id !== action.commentId))
 
-    case Do.MOST_POPULAR_COMMENTS:
+    case Do.UPDATE_COMMENTS:
+      return state.filter((comment) => (comment.id !== action.payload.id)).concat(action.payload)
+
+      case Do.MOST_POPULAR_COMMENTS:
       return state.sort(mostPopular)
 
     case Do.MOST_RECENT_COMMENTS:
@@ -51,7 +54,16 @@ const commentVote = (post, option) => {
 
 export const comment = (state = {}, action) => {
   switch (action.type) {
-    case Do.COMMENT:
+    case Do.CHANGE_COMMENT:
+      let {type, ...values} = action
+      return {
+        ...state,
+        ...values
+      }
+    case Do.PREPARE_COMMENT:
+      return action.comment
+
+      case Do.COMMENT:
       let {
         id,
         timestamp,
@@ -61,6 +73,8 @@ export const comment = (state = {}, action) => {
         voteScore
       } = action
       return {...state, id, timestamp, author, body, parentId, voteScore}
+    case Do.CLEAR_COMMENT:
+      return {}
     default:
       return state
   }
