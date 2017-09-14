@@ -25,7 +25,7 @@ export const comments = (state = [], action) => {
     case Do.REMOVE_POST:
       return state.map((comment) => {
         if (comment.parentId === action.postId) {
-          Object.assign(comment, {parentId: null})
+          return Object.assign(comment, {parentId: null})
         }
       })
 

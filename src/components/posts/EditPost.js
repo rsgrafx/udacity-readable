@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {createPost} from '../../actions/posts'
+
 import {getCategories} from  '../../actions'
 import {getPost, updatePost} from '../../actions/posts'
 import store from '../../store'

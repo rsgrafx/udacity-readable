@@ -14,7 +14,7 @@ export const categories = (state = [], action) => {
 
 export const category = (state = {}, action) => {
   if (action.type === Do.CATEGORY) {
-    let {name, path} = action
+    let {name} = action
     return {name, category}
   } else {
     return state

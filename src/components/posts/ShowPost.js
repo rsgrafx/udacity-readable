@@ -12,7 +12,6 @@ import {
 } from '../../actions/posts'
 
 import {
-  deleteComment,
   getComments,
   sortCommentbyVote,
   sortCommentsMostRecent
@@ -42,7 +41,7 @@ class ShowPost extends Component {
     })
 
     const post = store.getState().post
-    const { commentsByMostVotes, commentsMostRecent, removePost } = this.props
+    const { commentsByMostVotes, commentsMostRecent } = this.props
     const payload = {
       type: Do.POST_VOTE,
       postId: post.id

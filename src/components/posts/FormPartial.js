@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Do from '../../actions/constants'
 import store from '../../store'
-import {newPost} from '../../actions/posts'
 
 class Form extends Component {
 
@@ -32,10 +31,6 @@ class Form extends Component {
     })
   }
 
-  componentWillMount() {
-    const {categories} = this.props
-  }
-
   onSubmitForm(event) {
     const {_title, _body, _author} = this.refs
     event.preventDefault()
@@ -55,7 +50,7 @@ class Form extends Component {
   }
 
   render() {
-
+    const {categories} = this.props
     return(
       <div id="create-post-form" className="col-md-8">
 
@@ -75,7 +70,7 @@ class Form extends Component {
           <select
             className="form-control"
             onChange={this.handleCategoryChange.bind(this)}>
-            {this.props.categories.map((cat) => (<option key={cat.name} value={cat.name}>{cat.name}</option>))}
+            {categories.map((cat) => (<option key={cat.name} value={cat.name}>{cat.name}</option>))}
           </select>
 
           <input
