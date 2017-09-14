@@ -1,112 +1,99 @@
-# Readable Udacity App
-
-This application has two parts - `frontend` and the `backend`
+# Readable API Server
 
 ## Installation
 
 Install packages: `npm install`
+Launch server: `node server`
+Unless modified in `config.js` server will use port 5001
 
-Launch server: `yarn start`
-
-Launch Node Express backend: `cd ./backend && node start`
-
-# Backend Development Server
-
-`git clone https://github.com/udacity/reactnd-project-readable-starter`
-
-run cd into folder and `npm install && yarn start`
-
-Unless modified in `config.js` server will use port `3000`
-
-Backend Server will run on port `5001`
 
 ## API
 Use an Authorization header to work with your own data:
 
 `fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})`
 
-The following endpoints are available:
+The following endpoints are available:  
 
-`GET /categories`
-  **USAGE:**
+`GET /categories`  
+  **USAGE:**   
     Get all of the categories available for the app. List is found in categories.js.
-    Feel free to extend this list as you desire.
+    Feel free to extend this list as you desire.    
 
-`GET /:category/posts`
-  **USAGE:**
-    Get all of the posts for a particular category
+`GET /:category/posts`  
+  **USAGE:**    
+    Get all of the posts for a particular category   
 
-`GET /posts`
-  **USAGE:**
-    Get all of the posts. Useful for the main page when no category is selected.
+`GET /posts`  
+  **USAGE:**    
+    Get all of the posts. Useful for the main page when no category is selected.  
 
-`POST /posts`
-  **USAGE:**
-    Add a new post
+`POST /posts`  
+  **USAGE:**  
+    Add a new post  
+  
+  **PARAMS:**   
+    id - UUID should be fine, but any unique id will work  
+    timestamp - timestamp in whatever format you like, you can use Date.now() if you like  
+    title - String  
+    body - String  
+    owner - String  
+    category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.  
 
-  **PARAMS:**
-    id - UUID should be fine, but any unique id will work
-    timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-    title - String
-    body - String
-    owner - String
-    category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
+`GET /posts/:id`  
+  **USAGE:**  
+    Get the details of a single post  
 
-`GET /posts/:id`
-  **USAGE:**
-    Get the details of a single post
+`POST /posts/:id`  
+  **USAGE:**  
+    Used for voting on a post  
 
-`POST /posts/:id`
-  **USAGE:**
-    Used for voting on a post
+  **PARAMS:**  
+    option - String: Either "upVote" or "downVote"  
+    
+`PUT /posts/:id`  
+  **USAGE:**  
+    Edit the details of an existing post  
 
-  **PARAMS:**
-    option - String: Either "upVote" or "downVote"
+  **PARAMS:**  
+    title - String  
+    body - String  
 
-`PUT /posts/:id`
-  **USAGE:**
-    Edit the details of an existing post
+`DELETE /posts/:id`  
+  **USAGE:**  
+    Sets the deleted flag for a post to 'true'.   
+    Sets the parentDeleted flag for all child comments to 'true'.  
+  
+`GET /posts/:id/comments`  
+  **USAGE:**  
+    Get all the comments for a single post  
 
-  **PARAMS:**
-    title - String
-    body - String
+`POST /comments`  
+  **USAGE:**  
+    Add a comment to a post  
 
-`DELETE /posts/:id`
-  **USAGE:**
-    Sets the deleted flag for a post to 'true'.
-    Sets the parentDeleted flag for all child comments to 'true'.
+  **PARAMS:**  
+    id: Any unique ID. As with posts, UUID is probably the best here.  
+    timestamp: timestamp. Get this however you want.  
+    body: String  
+    owner: String  
+    parentId: Should match a post id in the database.  
 
-`GET /posts/:id/comments`
-  **USAGE:**
-    Get all the comments for a single post
+`GET /comments/:id`  
+  **USAGE:**  
+    Get the details for a single comment  
 
-`POST /comments`
-  **USAGE:**
-    Add a comment to a post
+`POST /comments/:id`  
+  **USAGE:**  
+    Used for voting on a comment.  
 
-  **PARAMS:**
-    id: Any unique ID. As with posts, UUID is probably the best here.
-    timestamp: timestamp. Get this however you want.
-    body: String
-    owner: String
-    parentId: Should match a post id in the database.
+`PUT /comments/:id`  
+  **USAGE:**  
+    Edit the details of an existing comment  
+  
+  **PARAMS:**  
+    timestamp: timestamp. Get this however you want.  
+    body: String  
 
-`GET /comments/:id`
-  **USAGE:**
-    Get the details for a single comment
-
-`POST /comments/:id`
-  **USAGE:**
-    Used for voting on a comment.
-
-`PUT /comments/:id`
-  **USAGE:**
-    Edit the details of an existing comment
-
-  **PARAMS:**
-    timestamp: timestamp. Get this however you want.
-    body: String
-
-`DELETE /comments/:id`
-  **USAGE:**
-    Sets a comment's deleted flag to 'true'
+`DELETE /comments/:id`  
+  **USAGE:**  
+    Sets a comment's deleted flag to 'true'  
