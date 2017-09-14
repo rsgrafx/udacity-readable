@@ -11,7 +11,8 @@ const CommentForm = (props) => {
       timestamp: Date.now(),
       body: body.value,
       author: author.value,
-      parentId: props.postID
+      parentId: props.postID,
+      voteScore: 0
     }
     event.preventDefault()
 
@@ -25,19 +26,19 @@ const CommentForm = (props) => {
     <div className="row comment-form">
       <form onSubmit={submitComment} >
         <div className="form-group">
-          <label>Share your viewpoint: {props.postID} </label><br />
+          <label>Share your viewpoint:</label><br />
+          <div className="form-group">
+            <label>Your Name: </label>
+            <input
+              ref={input => {author = input}}
+              type="text"
+              name="post_comment_author" />
+          </div>
           <textarea
             ref={input => {body = input}}
             name="details"
             cols="80"
             rows="3"></textarea>
-        </div>
-        <div className="form-group">
-          <label>Your Name: </label>
-          <input
-            ref={input => {author = input}}
-            type="text"
-            name="post_comment_author" />
         </div>
         <input type="submit" className="btn btn-success btn-large btn-rounded" value="Save" />
       </form>

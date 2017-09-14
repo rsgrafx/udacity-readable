@@ -77,6 +77,19 @@ export const createCommentApi = (comment) => {
   }).then((resp) => resp.json())
 }
 
+export const removeCommentApi = (commentId) => {
+  return fetch(`${API_ENDPOINT}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: headers
+    //,
+    // deleted: true
+  }).then((resp) => resp.json())
+}
+
+/*
+* Voting
+*/
+
 export const voteOnPost = ({option, postId}) => {
   return fetch(`${API_ENDPOINT}/posts/${postId}`, {
       method: 'POST',

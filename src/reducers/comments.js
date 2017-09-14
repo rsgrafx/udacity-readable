@@ -10,6 +10,9 @@ export const comments = (state = [], action) => {
     case Do.ADD_COMMENT:
       return [...state, comment({}, {...action, type: Do.COMMENT})]
 
+    case Do.REMOVE_COMMENT:
+      return state.filter((comment) => (comment.id !== action.commentId))
+
     case Do.MOST_POPULAR_COMMENTS:
       return state.sort(mostPopular)
 
@@ -54,9 +57,10 @@ export const comment = (state = {}, action) => {
         timestamp,
         parentId,
         author,
-        body
+        body,
+        voteScore
       } = action
-      return {...state, id, timestamp, author, body, parentId}
+      return {...state, id, timestamp, author, body, parentId, voteScore}
     default:
       return state
   }

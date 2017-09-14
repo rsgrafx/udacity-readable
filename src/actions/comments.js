@@ -1,5 +1,5 @@
 import Do from './constants'
-import {createCommentApi, fetchComments} from '../utils/api'
+import {removeCommentApi, createCommentApi, fetchComments} from '../utils/api'
 
 export const comments = (comments, postId) => {
   return {
@@ -16,10 +16,24 @@ export const addComment = (comment) => {
   }
 }
 
+export const removeComment = (commentId) => {
+  return {
+    type: Do.REMOVE_COMMENT,
+    commentId
+  }
+}
+
 export const getComments = (postId) => (dispatch) => {
   fetchComments(postId)
     .then((resp) => {
       dispatch(comments(resp, postId))
+    })
+}
+
+export const deleteComment = (commentId) => (dispatch) => {
+  removeCommentApi(commentId)
+    .then((resp) => {
+      dispatch(removeComment(commentId))
     })
 }
 

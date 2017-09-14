@@ -12,6 +12,7 @@ import {
 } from '../../actions/posts'
 
 import {
+  deleteComment,
   getComments,
   sortCommentbyVote,
   sortCommentsMostRecent
@@ -28,10 +29,6 @@ class ShowPost extends Component {
     const {router} = this.props
     this.props.loadPost(router.match.params.id)
     this.props.loadComments(router.match.params.id)
-
-    store.subscribe(() => {
-      this.setState({comments: store.getState().comments})
-    })
   }
 
   removeAndRedirect(postId) {
@@ -40,9 +37,12 @@ class ShowPost extends Component {
   }
 
   render() {
-    let comments
-    const post = store.getState().post
+    store.subscribe(() => {
+      this.setState({comments: store.getState().comments})
+    })
 
+    const post = store.getState().post
+    const { commentsByMostVotes, commentsMostRecent, removePost } = this.props
     const payload = {
       type: Do.POST_VOTE,
       postId: post.id
@@ -63,16 +63,17 @@ class ShowPost extends Component {
           <p>
             {post.body}
           </p>
+          <hr />
         </div>
         {this.state.redirect && <Redirect to={'/'} />}
         <div className="col-xs-10 col-md-11">
           <h3>Leave Comment</h3>
           <CommentForm postID={post.id}/>
           <h3>Recent Comments</h3>
-          <button onClick={() => {this.props.commentsMostRecent()}}>Most Recent</button>
-          <button onClick={() => {this.props.commentsByMostVotes()}}>Top Voted</button>
+          <button onClick={() => {commentsMostRecent()}}>Most Recent</button>
+          <button onClick={() => {commentsByMostVotes()}}>Top Voted</button>
           <hr />
-          {this.state.comments.map((comment) => <Comment key={comment.id} comment={comment}/>)}
+          {this.state.comments.map((c) => <Comment key={c.id} comm={c} />)}
         </div>
       </div>)
   }
