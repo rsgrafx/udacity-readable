@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import {Route} from 'react-router-dom'
-import store from './store'
+import React, { Component } from "react";
+import {Route} from "react-router-dom"
+import store from "./store"
 import Header from "./components/Header"
 import PostListings from "./components/PostListings"
 import Categories from "./components/Categories"
 import PostForm from "./components/posts/PostForm"
 import ShowPost from "./components/posts/ShowPost"
 import EditPostForm from "./components/posts/EditPost"
-import { getPostsByCategory } from './actions/posts'
+import { getPostsByCategory } from "./actions/posts"
 
 const Home = ({router, store}) => {
-  return(<div>
+  return(
+  <div>
     <Header />
     <PostListings router={router}/>
     <Categories />
@@ -49,7 +50,6 @@ export default class App extends Component {
     return (
       <div>
         <Route exact path="/newpost" render={(router) => <Post router={router} /> } />
-        <Route exact path="/post/:id" render={(router) => <ViewPost router={router} /> } />
         <Route exact path="/post/:id/edit" render={(router) => <EditPost router={router} /> } />
         <Route exact path="/:category"
             render={
@@ -59,6 +59,7 @@ export default class App extends Component {
               }
           }
         />
+        <Route exact path="/:category/:id" render={(router) => <ViewPost router={router} /> } />
         <Route exact path="/" render={() => <Home router={false}/> } />
       </div>
     );

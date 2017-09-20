@@ -17,12 +17,12 @@ const PostShortItem = ({post}) => {
   return(
     <div id="post-item">
       <div className="col-xs-10 col-md-11">
-        <Link to={`/post/${post.id}`}><h2>{post.title}</h2></Link>
+        <Link to={`/${post.category}/${post.id}`}><h2>{post.title}</h2></Link>
       <p>
         {post.body}
       </p>
       <span>
-        <Link to={`/post/${post.id}`}>Read Full Post</Link>
+        <Link className="btn btn-sml btn-warning" to={`/${post.category}/${post.id}`}>Read Full Post</Link>
         </span>
       <div id="post-meta-data">
           <span className="row">
@@ -30,7 +30,7 @@ const PostShortItem = ({post}) => {
             <span className="text-warning">Current Score: {post.voteScore}</span>
           </span>
       </div>
-
+      <small>Category: {post.category}</small>
     </div>
     <VoteControl payload={payload} />
   </div>)

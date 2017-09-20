@@ -2,7 +2,8 @@ import {combineReducers} from 'redux'
 
 import {comments, comment} from './comments'
 import {categories, category} from './categories'
-import {allPosts, posts, post} from  './posts'
+import {post} from './post'
+import {allPosts, posts} from  './posts'
 import votes from './votes'
 
 export default combineReducers({
