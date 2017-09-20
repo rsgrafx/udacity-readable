@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import { getCategories } from  '../actions'
 import { getPostsByCategory } from '../actions/posts'
@@ -16,10 +17,11 @@ class Categories extends Component {
     return(
     <div id="post-categories" className="col-md-4">
       <h3>Post Categories</h3>
-      <ul>
+      <ul className="list-group">
         {categories.map((cat) => (
-          <li key={cat.name}>
-            <a onClick={() => {this.props.filterByCategory(cat.name)}}>{cat.name}</a>
+          <li key={cat.name} className="list-group-item bg-default">
+            <Link to={cat.name}
+              className="btn btn-sml btn-fill"><b>{cat.name}</b></Link>
           </li>)
         )}
       </ul>
@@ -32,7 +34,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    filterByCategory: (data) => dispatch(getPostsByCategory(data)),
     loadCategories: (data) => dispatch(getCategories(data))
   }
 }
