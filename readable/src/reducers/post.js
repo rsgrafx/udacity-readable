@@ -1,4 +1,4 @@
-import Do from '../actions/constants'
+import Do from '../actions/types'
 
 export const post = (state = {}, action) => {
   switch (action.type) {

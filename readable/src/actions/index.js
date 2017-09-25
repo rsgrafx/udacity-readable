@@ -1,4 +1,4 @@
-import Do from './constants'
+import Do from './types'
 import {fetchCategories} from '../utils/api'
 import {voteOnComment, voteOnPost} from '../utils/api'
 

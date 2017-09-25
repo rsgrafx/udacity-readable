@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import Do from '../../actions/constants'
+import Do from '../../actions/types'
 import {
   createComment,
   editComment,

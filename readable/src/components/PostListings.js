@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import VoteControl from './votes/VoteControl'
-import Do from '../actions/constants'
+import Do from '../actions/types'
 
 import {getPosts} from '../actions/posts'
 
@@ -47,22 +47,26 @@ class PostListings extends Component {
   }
 
   render() {
-      const {posts, comments} = this.props
+      const {posts, allComments} = this.props
       return(
       <div id="post-listings" className="col-md-8">
           <h3>What's Happening Today</h3>
-          {posts.map((post) => <PostShortItem key={post.id} post={post} commentCount={this.commentCount(post.id, comments)}/>)}
+          {posts.map((post) => <PostShortItem
+            key={post.id}
+            post={post}
+            commentCount={this.commentCount(post.id, allComments)}
+            />)
+          }
       </div>)
     }
 }
 
-const mapStateToProps = (state) => {
-  return {posts: state.posts, comments: state.allComments}
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadPosts: () => dispatch(getPosts())
-  }
+const mapStateToProps = ({posts, allComments}) => {
+  return {posts, allComments}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostListings);
+const loadPosts = () => (dispatch) => {
+  dispatch(getPosts())
+}
+
+export default connect(mapStateToProps, {loadPosts})(PostListings);

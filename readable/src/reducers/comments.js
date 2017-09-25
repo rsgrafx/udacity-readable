@@ -1,4 +1,4 @@
-import Do from '../actions/constants'
+import Do from '../actions/types'
 import {mostRecent, mostPopular}  from  '../actions/sorter'
 
 export const comments = (state = [], action) => {

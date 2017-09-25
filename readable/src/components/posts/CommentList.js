@@ -9,13 +9,24 @@ import {
 } from '../../actions/comments'
 
 class CommentList extends Component {
+  state = {
+    comments: []
+  }
+  commentFilter(func) {
+    func()
+    this.setState({comments: store.getState().comments})
+  }
+  componentWillMount() {
+    this.setState({comments: this.props.comments})
+  }
   render() {
+
     const {commentsMostRecent, commentsByMostVotes, comments} = this.props
     return(
       <div>
         <h3>Really Recent Comments</h3>
-        <button onClick={() => {commentsMostRecent()}}>Most Recent</button>
-        <button onClick={() => {commentsByMostVotes()}}>Top Voted</button>
+        <button onClick={() => {this.commentFilter(commentsMostRecent)}}>Most Recent</button>
+        <button onClick={() => {this.commentFilter(commentsByMostVotes)}}>Top Voted</button>
         <hr />
         {comments.map((c) => <Comment key={c.id} comm={c} />)}
       </div>

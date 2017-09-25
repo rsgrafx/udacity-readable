@@ -1,13 +1,13 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 
-import Do from '../actions/constants'
+import Do from '../actions/types'
 import reducer from '../reducers'
 
 const logDetails = store => next => action => {
   console.group(action.type)
   console.info("What is dispatched.", action)
-    let result = next(action) 
+    let result = next(action)
   console.log('next state', store.getState())
   console.groupEnd(action.type)
     return result

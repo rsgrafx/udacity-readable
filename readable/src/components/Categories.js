@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import { getCategories } from  '../actions'
-import store from '../store'
 
 class Categories extends Component {
 
@@ -12,7 +11,8 @@ class Categories extends Component {
   }
 
   render() {
-    const categories = store.getState().categories
+    const {categories} = this.props
+
     return(
     <div id="post-categories" className="col-md-4">
       <h3>Post Categories</h3>
@@ -28,8 +28,8 @@ class Categories extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state
+const mapStateToProps = ({categories}) => {
+  return {categories}
 }
 const loadCategories = (data) => (dispatch) => {
   dispatch(getCategories(data))

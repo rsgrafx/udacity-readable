@@ -1,4 +1,4 @@
-import Do from '../actions/constants'
+import Do from '../actions/types'
 
 const votes = (state = {}, action) => {
   switch (action.type) {

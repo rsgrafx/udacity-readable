@@ -1,4 +1,4 @@
-import Do from './constants'
+import Do from './types'
 import store from '../store'
 
 import {

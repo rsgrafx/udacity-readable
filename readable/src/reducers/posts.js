@@ -1,4 +1,4 @@
-import Do from '../actions/constants'
+import Do from '../actions/types'
 import {mostRecent, mostPopular}  from  '../actions/sorter'
 /*
   * When you create a post What are some of the things that need to happen.

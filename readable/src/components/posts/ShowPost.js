@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { Redirect } from 'react-router'
 import {connect} from 'react-redux'
 
-import Do from '../../actions/constants'
+import Do from '../../actions/types'
 
 import {
   getPost,

@@ -1,4 +1,4 @@
-import Do from './constants'
+import Do from './types'
 import {removeCommentApi, updateCommentApi, createCommentApi, fetchComments} from '../utils/api'
 
 export const comments = (comments, postId) => {

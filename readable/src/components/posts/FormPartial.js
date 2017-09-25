@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Do from '../../actions/constants'
+import Do from '../../actions/types'
 import store from '../../store'
 
 class Form extends Component {
