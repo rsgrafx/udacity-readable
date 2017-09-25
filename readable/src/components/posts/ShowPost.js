@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { Redirect } from 'react-router'
 import {connect} from 'react-redux'
+import Moment from 'react-moment'
 
 import Do from '../../actions/types'
 
@@ -50,7 +51,8 @@ class ShowPost extends Component {
             onClick={() => {this.removeAndRedirect(post.id)}}
             className="btn btn-small btn-danger">Delete Post</button>
           <h2>{post.title}</h2>
-          <h4>Author: {post.author} - {post.timestamp} </h4>
+          <h4>Author: {post.author}</h4>
+          <Moment className="text-warning label" element="span" fromNow>{post.timestamp}</Moment>
           <p>
             {post.body}
           </p>

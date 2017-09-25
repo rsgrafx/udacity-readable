@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import Moment from 'react-moment'
+
 import VoteControl from './votes/VoteControl'
 import Do from '../actions/types'
-
 import {getPosts} from '../actions/posts'
 
 const PostShortItem = ({post, commentCount}) => {
@@ -16,20 +17,16 @@ const PostShortItem = ({post, commentCount}) => {
     <div id="post-item">
       <div className="col-xs-10 col-md-11">
         <Link to={`/${post.category}/${post.id}`}><h2>{post.title}</h2></Link>
+        <Moment className="text-warning label" element="span" fromNow>{post.timestamp}</Moment>
+        <small>Tagged Category: {post.category}</small> •
+        <small className="text-success"> {commentCount} {(commentCount > 1 || commentCount === 0) ? "comments" : "comment"}</small>
+        <span className="text-warning"> • {post.voteScore} {(post.voteScore > 1 || post.voteScore === 0) ? "votes" : "vote"}</span>
       <p>
         {post.body}
       </p>
       <span>
         <Link className="btn btn-sml btn-warning" to={`/${post.category}/${post.id}`}>Read Full Post</Link>
-        </span>
-      <div id="post-meta-data">
-          <span className="row">
-            <span className="text-primary">{post.timestamp}</span><br />
-            <span className="text-warning">Current Score: {post.voteScore}</span>
-          </span>
-      </div>
-      <small>Category: {post.category}</small> <br/>
-      <small>CommentCount: {commentCount}</small>
+      </span>
     </div>
     <VoteControl payload={payload} />
   </div>)

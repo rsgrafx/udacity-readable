@@ -16,7 +16,12 @@ const defaultData = {
       {
         name: 'udacity',
         path: 'udacity'
+      },
+      {
+        name: 'random',
+        path: 'random'
       }
+
   ]
 }
 
@@ -32,7 +37,7 @@ function getData (token) {
 
 function getAll (token) {
   return new Promise((res) => {
-    res(getData(token))    
+    res(getData(token))
   })
 }
 

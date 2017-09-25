@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Moment from 'react-moment'
 
 import Do from '../../actions/types'
 import VoteControl from '../votes/VoteControl'
@@ -23,13 +24,16 @@ const Comment = (props) => {
     <div className="row comment-item">
       <div className="col-md-10 col-xs-12">
         <h4>{comm.body}</h4>
-        <span className="text-primary">Posted: {comm.timestamp}.</span>
-        <span className="text-warning">by {comm.author}</span>
+        <span className="text-primary">by {comm.author}</span>
+        <span className="text-primary">
+          Posted:
+          <Moment className="text-warning label" element="span" fromNow>{comm.timestamp}</Moment>
+        </span>
+        <span className="text-warning">{comm.voteScore} {(comm.voteScore > 1 || comm.voteScore === 0) ? "votes" : "vote"}</span>
         <div className="comment-control">
           <button onClick={() => {prepareComment(comm)} }>Edit</button>
           <button onClick={() => {removeComment(comm.id) }}>Remove</button>
         </div>
-        <span> Current Vote Score: { comm.voteScore}</span>
       </div>
       <VoteControl payload={payload}/>
     </div>
