@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Comment from '../comments/Comment'
+import store from '../../store'
 
 import {
   sortCommentbyVote,
@@ -22,12 +23,6 @@ class CommentList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    comments: state.comments
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     commentsByMostVotes: () => dispatch(sortCommentbyVote()),
@@ -35,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentList);
+export default connect(null, mapDispatchToProps)(CommentList);

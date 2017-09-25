@@ -33,7 +33,7 @@ class ShowPost extends Component {
   }
 
   render() {
-    const {post} = this.props
+    const {post, comments} = this.props
     const payload = {
       type: Do.POST_VOTE,
       postId: post.id
@@ -60,16 +60,16 @@ class ShowPost extends Component {
         <div className="col-xs-10 col-md-11">
           <h3>Leave Comment</h3>
           <CommentForm postID={post.id} />
-          <CommentList postId={post.id} />
+          <CommentList postId={post.id} comments={comments} />
         </div>
       </div>)
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({comments, post}) => {
   return {
-    comments: state.comments,
-    post: state.post
+    comments,
+    post
   }
 }
 
