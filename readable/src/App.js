@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Route, Switch} from "react-router-dom"
 import store from "./store"
 import Header from "./components/Header"
+import HeaderActions from "./components/HeaderActions"
 import PostListings from "./components/PostListings"
 import Categories from "./components/Categories"
 import PostForm from "./components/posts/PostForm"
@@ -13,6 +14,7 @@ const Home = ({router, store}) => {
   return(
   <div>
     <Header />
+    <HeaderActions />
     <PostListings router={router}/>
     <Categories />
   </div>)
