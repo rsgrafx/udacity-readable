@@ -37,8 +37,6 @@ const PostShortItem = ({post, commentCount}) => {
 
 class PostListings extends Component {
 
-  // loadCategoryPosts = (category) => store.dispatch(getPostsByCategory(category))
-
   commentCount = (postId, comments) => {
     return comments.filter(comment => comment.parentId === postId).length
   }

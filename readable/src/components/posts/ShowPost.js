@@ -12,13 +12,11 @@ import {
 
 import {
   getComments,
-  sortCommentbyVote,
-  sortCommentsMostRecent
 } from '../../actions/comments'
 
-import Comment from '../comments/Comment'
 import CommentForm from '../comments/CommentForm'
 import VoteControl from '../votes/VoteControl'
+import CommentList from './CommentList'
 
 class ShowPost extends Component {
   state = {redirect: false}
@@ -35,7 +33,7 @@ class ShowPost extends Component {
   }
 
   render() {
-    const { commentsByMostVotes, commentsMostRecent, post, comments } = this.props
+    const {post} = this.props
     const payload = {
       type: Do.POST_VOTE,
       postId: post.id
@@ -62,11 +60,7 @@ class ShowPost extends Component {
         <div className="col-xs-10 col-md-11">
           <h3>Leave Comment</h3>
           <CommentForm postID={post.id} />
-          <h3>Recent Comments</h3>
-          <button onClick={() => {commentsMostRecent()}}>Most Recent</button>
-          <button onClick={() => {commentsByMostVotes()}}>Top Voted</button>
-          <hr />
-          {comments.map((c) => <Comment key={c.id} comm={c} />)}
+          <CommentList postId={post.id} />
         </div>
       </div>)
   }
@@ -81,11 +75,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadPost: (data) => dispatch(getPost(data)),
-    removePost: (data) => dispatch(deletePost(data)),
     loadComments: (data) => dispatch(getComments(data)),
-    commentsByMostVotes: () => dispatch(sortCommentbyVote()),
-    commentsMostRecent: () => dispatch(sortCommentsMostRecent())
+    loadPost: (data) => dispatch(getPost(data)),
+    removePost: (data) => dispatch(deletePost(data))
   }
 }
 

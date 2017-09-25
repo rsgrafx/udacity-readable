@@ -31,10 +31,8 @@ class Categories extends Component {
 const mapStateToProps = (state) => {
   return state
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadCategories: (data) => dispatch(getCategories(data))
-  }
+const loadCategories = (data) => (dispatch) => {
+  dispatch(getCategories(data))
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, {loadCategories})(Categories);

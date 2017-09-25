@@ -74,10 +74,11 @@ const CommentForm = ({postID, editComment, newComment, clearCommentForm, comment
             cols="80"
             rows="3"></textarea>
         </div>
-        <input type="submit" className="btn btn-success btn-large btn-rounded" value="Save" />
+        <div className="col-md-4">
+          <button onClick={clear} className="btn btn-warning btn-large ">Cancel</button>
+          <input type="submit" className="pull-right btn btn-success" value="Save" />
+        </div>
       </form>
-      <button onClick={clear}
-        className="btn btn-warning btn-large">Cancel</button>
     </div>
   )
 }
