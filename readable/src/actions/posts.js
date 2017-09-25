@@ -2,6 +2,7 @@ import Do from './constants'
 import store from '../store'
 
 import {
+  fetchComments,
   fetchPosts,
   fetchPost,
   createPostApi,
@@ -79,10 +80,19 @@ export const deletePost = (postId) => dispatch => {
 
 export const getPosts = () => (dispatch) => {
   fetchPosts()
-    .then(data => {
+    .then((data) => {
+      dispatch({type: "CLEAR"})
+      loadComments(data, dispatch)
       dispatch(posts(data))
     })
   .catch(err => console.error(err))
+}
+
+const loadComments = (data, dispatch) => {
+  data.map((post) => {
+    fetchComments(post.id)
+      .then(comment_data => dispatch({type: "LOAD_COMMENTS", comments: comment_data}))
+  })
 }
 
 export const getPost = (postId) => (dispatch) => {

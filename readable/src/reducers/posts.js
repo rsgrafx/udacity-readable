@@ -57,6 +57,8 @@ const postVote = (post, option) => {
 
 export const allPosts = (state = [], action) => {
   switch (action.type) {
+    case "CLEAR":
+      return []
     case Do.POSTS:
       return [...state, ...action.posts]
     default:

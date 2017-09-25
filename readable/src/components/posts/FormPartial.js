@@ -3,6 +3,9 @@ import Do from '../../actions/constants'
 import store from '../../store'
 
 class Form extends Component {
+  state = {
+    redirected: false
+  }
 
   handleTitleChange(event) {
     store.dispatch({
@@ -47,13 +50,15 @@ class Form extends Component {
     _title.value = ''
     _body.value = ''
     _author.value = ''
+    this.setState({redirected: true})
   }
 
   render() {
     const {categories} = this.props
     return(
+    <div>
+    { (this.state.redirected === false) ?
       <div id="create-post-form" className="col-md-8">
-
         <form onSubmit={this.onSubmitForm.bind(this)}>
           <label>Title</label>
           <input
@@ -66,13 +71,11 @@ class Form extends Component {
             className="form-control"
             />
           <label>Authors Name</label>
-
           <select
             className="form-control"
             onChange={this.handleCategoryChange.bind(this)}>
             {categories.map((cat) => (<option key={cat.name} value={cat.name}>{cat.name}</option>))}
           </select>
-
           <input
             type="text"
             ref="_author"
@@ -95,7 +98,10 @@ class Form extends Component {
           <input type="submit" className="btn btn-success btn-large btn-rounded" value="Save" />
           <a className="btn btn-warning btn-large btn-rounded" href="/">Cancel</a>
         </form>
-      </div>)
+      </div>
+      : <h1> Post Submitted. </h1>
+      }
+    </div>)
     }
 }
 

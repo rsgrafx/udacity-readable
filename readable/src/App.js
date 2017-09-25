@@ -18,11 +18,11 @@ const Home = ({router, store}) => {
   </div>)
 }
 
-const Post = (props) => {
+const NewPost = ({router, store}) => {
    return(
      <div>
       <Header />
-      <PostForm />
+      <PostForm router={router}/>
      </div>
    )
  }
@@ -49,13 +49,17 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/newpost" render={(router) => <Post router={router} /> } />
+        <Route exact path="/newpost" render={(router) => <NewPost router={router} /> } />
         <Route exact path="/post/:id/edit" render={(router) => <EditPost router={router} /> } />
         <Route exact path="/:category"
             render={
               (router) => {
-                store.dispatch(getPostsByCategory(router.match.params.category))
-                return <Home router={router} />
+                if (router.match.params.category === "newpost") {
+                  return null
+                } else {
+                  store.dispatch(getPostsByCategory(router.match.params.category))
+                  return <Home router={router} />
+                }
               }
           }
         />

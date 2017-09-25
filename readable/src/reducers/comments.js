@@ -16,7 +16,7 @@ export const comments = (state = [], action) => {
     case Do.UPDATE_COMMENTS:
       return state.filter((comment) => (comment.id !== action.payload.id)).concat(action.payload)
 
-      case Do.MOST_POPULAR_COMMENTS:
+    case Do.MOST_POPULAR_COMMENTS:
       return state.sort(mostPopular)
 
     case Do.MOST_RECENT_COMMENTS:
@@ -37,6 +37,17 @@ export const comments = (state = [], action) => {
           return comment
         }
       })
+    default:
+      return state
+  }
+}
+
+export const allComments = (state = [], action) => {
+  switch (action.type) {
+    case "CLEAR":
+      return []
+    case "LOAD_COMMENTS":
+      return [...state, ...action.comments]
     default:
       return state
   }

@@ -15,6 +15,7 @@ class PostForm extends Component {
     return(<Form
       categories={this.props.categories}
       formFunc={this.props.newPost}
+      router={this.props.router}
       />)
   }
 }
