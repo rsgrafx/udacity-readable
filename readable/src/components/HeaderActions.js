@@ -25,7 +25,7 @@ const HeaderActions = ({sortPosts}) => {
       <div id="sort-posts" className="col-md-3">
         <FlatButton
               href="/newpost"
-              label="Share Your Thoughts"
+              label="Add New Post"
               labelPosition="after"
               primary={true}
               icon={<ModeEdit />}
