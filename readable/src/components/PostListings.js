@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
+import FlatButton from 'material-ui/FlatButton'
 
 import VoteControl from './votes/VoteControl'
 import Do from '../actions/types'
@@ -25,7 +26,11 @@ const PostShortItem = ({post, commentCount}) => {
         {post.body}
       </p>
       <span>
-        <Link className="btn btn-sml btn-warning" to={`/${post.category}/${post.id}`}>Read Full Post</Link>
+      <FlatButton
+        href={`/${post.category}/${post.id}`}
+        onClick={() => {this.removeAndRedirect(post.id)}}
+        label="Read Full Post"
+        primary={true}/>
       </span>
     </div>
     <VoteControl payload={payload} />

@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import { Redirect } from 'react-router'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
+import FlatButton from 'material-ui/FlatButton'
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 
 import Do from '../../actions/types'
 
@@ -44,15 +45,25 @@ class ShowPost extends Component {
       <div id="post-item">
         <div className="col-xs-10 col-md-11">
           <VoteControl payload={payload}/>
-          <Link to={`/post/${post.id}/edit`}
-            className="btn btn-warning">Edit Post
-          </Link>
-          <button
-            onClick={() => {this.removeAndRedirect(post.id)}}
-            className="btn btn-small btn-danger">Delete Post</button>
+
           <h2>{post.title}</h2>
+
+          <FlatButton
+            href={`/post/${post.id}/edit`}
+            label="Edit Post"
+            labelPosition="before"
+            primary={true}
+            icon={<ModeEdit />}
+          />
+
+          <FlatButton
+            onClick={() => {this.removeAndRedirect(post.id)}}
+            label="Remove Post"
+            primary={true}
+          />
+
           <h4>Author: {post.author}</h4>
-          <Moment className="text-warning label" element="span" fromNow>{post.timestamp}</Moment>
+            <Moment className="text-warning label"element="span" fromNow>{post.timestamp}</Moment>
           <p>
             {post.body}
           </p>

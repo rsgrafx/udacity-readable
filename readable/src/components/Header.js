@@ -2,6 +2,10 @@ import React from 'react'
 import {sort} from '../actions/sorter'
 import {connect} from 'react-redux'
 
+import FlatButton from 'material-ui/FlatButton'
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
+
+
 const Header = (props) => {
   return(
     <section id="main-tab-header">
@@ -9,7 +13,7 @@ const Header = (props) => {
         <h1> <a href="/">Readable</a></h1>
       </div>
       <div className="row">
-        <div id="sort-posts" className="col-md-10">
+        <div id="sort-posts" className="col-md-9">
           <ul>
             <li><a id="most-popular" onClick={() => {
               props.sortPosts("MOST_POPULAR_POSTS")}}>Most Popular</a>
@@ -19,9 +23,17 @@ const Header = (props) => {
             </li>
           </ul>
         </div>
-        <div id="sort-posts" className="col-md-2">
-          <a className="btn btn-primary btn-large btn-rounded" href="/newpost">Start Writing</a>
+        <div id="sort-posts" className="col-md-3">
+        <FlatButton
+              href="/newpost"
+              label="Share Your Thoughts"
+              labelPosition="after"
+              primary={true}
+              icon={<ModeEdit />}
+          />
         </div>
+
+
       </div>
       <hr />
     </section>
