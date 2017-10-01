@@ -70,3 +70,7 @@ export const sortCommentbyVote = () => (dispatch) => {
 export const sortCommentsMostRecent = () => (dispatch) => {
   dispatch({type: Do.MOST_RECENT_COMMENTS})
 }
+
+export const prepareComment = (data) => (dispatch) => {
+  dispatch({type: Do.PREPARE_COMMENT, comment: data})
+}

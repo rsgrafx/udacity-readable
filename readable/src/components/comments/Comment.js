@@ -2,51 +2,40 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 
-import Do from '../../actions/types'
 import VoteControl from '../votes/VoteControl'
-import {deleteComment} from '../../actions/comments'
+import {deleteComment, prepareComment} from '../../actions/comments'
+import {commentVote} from '../../actions/votes'
 
 
 const Comment = ({comm, removeComment, prepare}) => {
-
-  // const {comm, removeComment, prepare} = props
-
-  const payload = {
-    type: Do.COMMENT_VOTE,
-    commentId: comm.id
-  }
-
-  // const prepareComment = (comment) => {
-  //   prepare(comment)
-  // }
 
   return(
     <div className="row comment-item">
       <div className="col-md-10 col-xs-12">
         <h4>{comm.body}</h4>
-        <span className="text-primary">by {comm.author}</span>
+        <em>by: </em>
+        <span className="text-danger">{comm.author} </span>
+        <br />
         <span className="text-primary">
-          Posted:
+          <em>Posted: </em>
           <Moment className="text-warning label" element="span" fromNow>{comm.timestamp}</Moment>
         </span>
         <span className="text-warning">{comm.voteScore} {(comm.voteScore > 1 || comm.voteScore === 0) ? "votes" : "vote"}</span>
         <div className="comment-control">
-          <button onClick={() => {prepare(comm)} }>Edit</button>
-          <button onClick={() => {removeComment(comm.id) }}>Remove</button>
+          <button className="label btn-success" onClick={() => {prepare(comm)} }>Edit</button>
+          <button className="label btn-warning" onClick={() => {removeComment(comm.id) }}>Remove</button>
         </div>
       </div>
-      <VoteControl payload={payload}/>
+      <VoteControl payload={commentVote(comm.id)}/>
     </div>
   )
 }
 
-const mapStateToProps = (state) => { return state }
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    prepare: (data) => dispatch({type: "PREPARE_COMMENT", comment: data}),
+    prepare: (data) => dispatch(prepareComment(data)),
     removeComment: (data) => dispatch(deleteComment(data)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comment)
+export default connect(state => ({...state}), mapDispatchToProps)(Comment)

@@ -11,7 +11,7 @@ import {
   getComments,
 } from '../actions/comments'
 
-const ViewPost = ({router, store, fetchPost, loadComments}) => {
+const ViewPost = ({router, fetchPost, loadComments}) => {
   fetchPost(router.match.params.id)
   loadComments(router.match.params.id)
   return(

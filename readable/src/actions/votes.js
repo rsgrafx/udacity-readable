@@ -6,3 +6,10 @@ export function postVote(postId) {
     postId
   }
 }
+
+export function commentVote(commentId) {
+  return {
+    type: Do.COMMENT_VOTE,
+    commentId
+  }
+}

@@ -5,7 +5,6 @@ import Moment from 'react-moment'
 import FlatButton from 'material-ui/FlatButton'
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 
-import Do from '../../actions/types'
 import {postVote} from '../../actions/votes'
 
 import {deletePost} from '../../actions/posts'
@@ -24,53 +23,42 @@ class ShowPostPartial extends Component {
 
   render() {
     const {post, comments} = this.props
-    const payload = {
-      type: Do.POST_VOTE,
-      postId: post.id
-    }
-
     return(
       <div id="post-item">
-        <div className="col-xs-10 col-md-11">
-          <VoteControl payload={postVote(post.id)}/>
-
-          <h2>{post.title}</h2>
-
-          <FlatButton
-            href={`/post/${post.id}/edit`}
-            label="Edit Post"
-            labelPosition="before"
-            primary={true}
-            icon={<ModeEdit />}
-          />
-
-          <FlatButton
-            onClick={() => {this.removeAndRedirect(post.id)}}
-            label="Remove Post"
-            primary={true}
-          />
-
-          <h4>Author: {post.author}</h4>
-            <Moment className="text-warning label"element="span" fromNow>{post.timestamp}</Moment>
-          <p>
-            {post.body}
-          </p>
-          <hr />
+        {
+        (post.id === undefined) ? <h3> The Post your looking for does not exist or has been deleted. </h3>
+        : <div>
+            <div className="col-xs-10 col-md-11">
+              <VoteControl payload={postVote(post.id)}/>
+              <h2>{post.title}</h2>
+              <FlatButton
+                href={`/post/${post.id}/edit`}
+                label="Edit Post"
+                labelPosition="before"
+                primary={true}
+                icon={<ModeEdit />}
+              />
+              <FlatButton
+                onClick={() => {this.removeAndRedirect(post.id)}}
+                label="Remove Post"
+                primary={true}
+              />
+              <h4>Author: {post.author}</h4>
+                <Moment className="text-warning label"element="span" fromNow>{post.timestamp}</Moment>
+              <p>
+                {post.body}
+              </p>
+              <hr />
+            </div>
+            {this.state.redirect && <Redirect to={'/'} />}
+            <div className="col-xs-10 col-md-11">
+              <h3>Leave Comment</h3>
+              <CommentForm postID={post.id} />
+              <CommentList postId={post.id} comments={comments} />
+            </div>
         </div>
-        {this.state.redirect && <Redirect to={'/'} />}
-        <div className="col-xs-10 col-md-11">
-          <h3>Leave Comment</h3>
-          <CommentForm postID={post.id} />
-          <CommentList postId={post.id} comments={comments} />
-        </div>
+        }
       </div>)
-  }
-}
-
-const mapStateToProps = ({comments, post}) => {
-  return {
-    comments,
-    post
   }
 }
 
@@ -80,4 +68,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPostPartial);
+export default connect(({comments, post}) => ({
+    comments,
+    post
+}), mapDispatchToProps)(ShowPostPartial);
