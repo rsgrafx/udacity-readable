@@ -17,7 +17,7 @@ const HeaderActions = ({sortPosts}) => {
           />
           <FlatButton
             onClick={() => {sortPosts("MOST_RECENT_POSTS")}}
-            label="Most Popular"
+            label="Most Recent"
             labelPosition="after"
             primary={true}
           />
