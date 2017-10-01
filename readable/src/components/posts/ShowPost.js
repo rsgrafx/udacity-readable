@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 
 import Do from '../../actions/types'
+import {postVote} from '../../actions/votes'
 
 import {deletePost} from '../../actions/posts'
 
@@ -31,7 +32,7 @@ class ShowPostPartial extends Component {
     return(
       <div id="post-item">
         <div className="col-xs-10 col-md-11">
-          <VoteControl payload={payload}/>
+          <VoteControl payload={postVote(post.id)}/>
 
           <h2>{post.title}</h2>
 
