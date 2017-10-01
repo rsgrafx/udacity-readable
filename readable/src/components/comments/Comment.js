@@ -7,18 +7,18 @@ import VoteControl from '../votes/VoteControl'
 import {deleteComment} from '../../actions/comments'
 
 
-const Comment = (props) => {
+const Comment = ({comm, removeComment, prepare}) => {
 
-  const {comm, removeComment, prepare} = props
+  // const {comm, removeComment, prepare} = props
 
   const payload = {
     type: Do.COMMENT_VOTE,
     commentId: comm.id
   }
 
-  const prepareComment = (comment) => {
-    prepare(comment)
-  }
+  // const prepareComment = (comment) => {
+  //   prepare(comment)
+  // }
 
   return(
     <div className="row comment-item">
@@ -31,7 +31,7 @@ const Comment = (props) => {
         </span>
         <span className="text-warning">{comm.voteScore} {(comm.voteScore > 1 || comm.voteScore === 0) ? "votes" : "vote"}</span>
         <div className="comment-control">
-          <button onClick={() => {prepareComment(comm)} }>Edit</button>
+          <button onClick={() => {prepare(comm)} }>Edit</button>
           <button onClick={() => {removeComment(comm.id) }}>Remove</button>
         </div>
       </div>

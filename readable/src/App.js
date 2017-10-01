@@ -6,7 +6,7 @@ import HeaderActions from "./components/HeaderActions"
 import PostListings from "./components/PostListings"
 import Categories from "./components/Categories"
 import PostForm from "./components/posts/PostForm"
-import ShowPost from "./components/posts/ShowPost"
+import ViewPost from "./components/ViewPost"
 import EditPostForm from "./components/posts/EditPost"
 import { getPostsByCategory } from "./actions/posts"
 
@@ -27,15 +27,6 @@ const NewPost = ({router, store}) => {
       <PostForm router={router}/>
      </div>
    )
- }
-
- const ViewPost = ({router, store}) => {
-  return(
-    <div>
-     <Header />
-     <ShowPost router={router} />
-    </div>
-  )
  }
 
  const EditPost = ({router, store}) => {

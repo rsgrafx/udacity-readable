@@ -7,27 +7,14 @@ import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 
 import Do from '../../actions/types'
 
-import {
-  getPost,
-  deletePost
-} from '../../actions/posts'
-
-import {
-  getComments,
-} from '../../actions/comments'
+import {deletePost} from '../../actions/posts'
 
 import CommentForm from '../comments/CommentForm'
 import VoteControl from '../votes/VoteControl'
 import CommentList from './CommentList'
 
-class ShowPost extends Component {
+class ShowPostPartial extends Component {
   state = {redirect: false}
-
-  componentWillMount() {
-    const {router} = this.props
-    this.props.loadPost(router.match.params.id)
-    this.props.loadComments(router.match.params.id)
-  }
 
   removeAndRedirect(postId) {
     this.props.removePost(postId)
@@ -88,10 +75,8 @@ const mapStateToProps = ({comments, post}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadComments: (data) => dispatch(getComments(data)),
-    loadPost: (data) => dispatch(getPost(data)),
     removePost: (data) => dispatch(deletePost(data))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPost);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPostPartial);
